@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard.css') }}">
+{% endblock %}
+{% block content %}
+    <section id="volumes">
+
+        {% for state_name, info in content.items() %}
+        {% with state = info.state %}
+        {% with volumes = info.volumes %}
+        <div class="state_block">
+            <div class="top" onclick="open_states()">
+                <span></span>
+                <h1 style="--color: {{ state.color }}">{{ state.name }}</h1>
+                <p>&#10095;</p>
+            </div>
+            <div class="volumes">
+                {% for volume in volumes %}
+                <div class="volume" onclick="open_volume({{ volume }})">
+                    <div class="top">
+                        <img src="{{ volume.cover_art_link }}" alt="cover" onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';">
+                        <div class="fallback">
+                            <svg fill="#ffffff" height="32px" width="32px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 489.935 489.935" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M486.617,255.067c4.6-6.3,4.4-14.9-0.5-21c-74.1-91.1-154.1-137.3-237.9-137.3c-142.1,0-240.8,132.4-244.9,138 c-4.6,6.3-4.4,14.9,0.5,21c74,91.2,154,137.4,237.8,137.4C383.717,393.167,482.417,260.767,486.617,255.067z M241.617,358.867 c-69.8,0-137.8-38.4-202.4-114c25.3-29.9,105.7-113.8,209-113.8c69.8,0,137.8,38.4,202.4,114 C425.317,274.967,344.917,358.867,241.617,358.867z"></path> <path d="M244.917,157.867c-48,0-87.1,39.1-87.1,87.1s39.1,87.1,87.1,87.1s87.1-39.1,87.1-87.1S292.917,157.867,244.917,157.867z M244.917,297.767c-29.1,0-52.8-23.7-52.8-52.8s23.7-52.8,52.8-52.8s52.8,23.7,52.8,52.8S274.017,297.767,244.917,297.767z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                            <p>У этого тома нет обложки</p>
+                        </div>
+                        <span>
+                            <svg fill="#ffffff" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.273 490.273" xml:space="preserve" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M313.548,152.387l-230.8,230.9c-6.7,6.7-6.7,17.6,0,24.3c3.3,3.3,7.7,5,12.1,5s8.8-1.7,12.1-5l230.8-230.8 c6.7-6.7,6.7-17.6,0-24.3C331.148,145.687,320.248,145.687,313.548,152.387z"></path> <path d="M431.148,191.887c4.4,0,8.8-1.7,12.1-5l25.2-25.2c29.1-29.1,29.1-76.4,0-105.4l-34.4-34.4 c-14.1-14.1-32.8-21.8-52.7-21.8c-19.9,0-38.6,7.8-52.7,21.8l-25.2,25.2c-6.7,6.7-6.7,17.6,0,24.3l115.6,115.6 C422.348,190.187,426.748,191.887,431.148,191.887z M352.948,45.987c7.6-7.6,17.7-11.8,28.5-11.8c10.7,0,20.9,4.2,28.5,11.8 l34.4,34.4c15.7,15.7,15.7,41.2,0,56.9l-13.2,13.2l-91.4-91.4L352.948,45.987z"></path> <path d="M162.848,467.187l243.5-243.5c6.7-6.7,6.7-17.6,0-24.3s-17.6-6.7-24.3,0l-239.3,239.5l-105.6,14.2l14.2-105.6 l228.6-228.6c6.7-6.7,6.7-17.6,0-24.3c-6.7-6.7-17.6-6.7-24.3,0l-232.6,232.8c-2.7,2.7-4.4,6.1-4.9,9.8l-18,133.6 c-0.7,5.3,1.1,10.6,4.9,14.4c3.2,3.2,7.6,5,12.1,5c0.8,0,1.5-0.1,2.3-0.2l133.6-18 C156.748,471.587,160.248,469.887,162.848,467.187z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                        </span>
+                    </div>
+                    <strong>{{ volume.title }}</strong>
+                </div>
+                {% endfor %}
+
+                <div class="volume" onclick="open_add_volume({{ state }})">
+                    <div class="top">
+                        <div class="fallback">
+                            <svg fill="#ffffff" height="32px" width="32px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M227.8,174.1v53.7h-53.7c-9.5,0-17.2,7.7-17.2,17.2s7.7,17.2,17.2,17.2h53.7v53.7c0,9.5,7.7,17.2,17.2,17.2 s17.1-7.7,17.1-17.2v-53.7h53.7c9.5,0,17.2-7.7,17.2-17.2s-7.7-17.2-17.2-17.2h-53.7v-53.7c0-9.5-7.7-17.2-17.1-17.2 S227.8,164.6,227.8,174.1z"></path> <path d="M71.7,71.7C25.5,118,0,179.5,0,245s25.5,127,71.8,173.3C118,464.5,179.6,490,245,490s127-25.5,173.3-71.8 C464.5,372,490,310.4,490,245s-25.5-127-71.8-173.3C372,25.5,310.5,0,245,0C179.6,0,118,25.5,71.7,71.7z M455.7,245 c0,56.3-21.9,109.2-61.7,149s-92.7,61.7-149,61.7S135.8,433.8,96,394s-61.7-92.7-61.7-149S56.2,135.8,96,96s92.7-61.7,149-61.7 S354.2,56.2,394,96S455.7,188.7,455.7,245z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                        </div>
+                    </div>
+                    <strong>Добавить новый том в эту группу</strong>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+        {% endwith %}
+        {% endfor %}
+    </section>
+    <section id="addVolume">
+        <div class="modal_block">
+            <h1>Добавить новый том</h1>
+            <form action="{{ url_for('add_volume') }}" method="POST" class="flex_direction-column">
+                <div class="flex_direction-row">
+                    <div class="flex_direction-column">
+                        <div class="fallback">
+                            <svg fill="#ffffff" height="32px" width="32px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 489.935 489.935" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M486.617,255.067c4.6-6.3,4.4-14.9-0.5-21c-74.1-91.1-154.1-137.3-237.9-137.3c-142.1,0-240.8,132.4-244.9,138 c-4.6,6.3-4.4,14.9,0.5,21c74,91.2,154,137.4,237.8,137.4C383.717,393.167,482.417,260.767,486.617,255.067z M241.617,358.867 c-69.8,0-137.8-38.4-202.4-114c25.3-29.9,105.7-113.8,209-113.8c69.8,0,137.8,38.4,202.4,114 C425.317,274.967,344.917,358.867,241.617,358.867z"></path> <path d="M244.917,157.867c-48,0-87.1,39.1-87.1,87.1s39.1,87.1,87.1,87.1s87.1-39.1,87.1-87.1S292.917,157.867,244.917,157.867z M244.917,297.767c-29.1,0-52.8-23.7-52.8-52.8s23.7-52.8,52.8-52.8s52.8,23.7,52.8,52.8S274.017,297.767,244.917,297.767z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                            <p>Не забудьте вставить ссылку на изображение обложки</p>
+                        </div>
+                        <input type="text" name="cover_art_link" placeholder="Ссылка на обложку">
+                    </div>
+                    <div class="flex_direction-column">
+                        <div class="flex_direction-row">
+                            <input type="text" name="title" placeholder="Название">
+                            <div class="select_wrapper">
+                                <select name="state">
+                                    {% for state in states %}
+                                    <option value="{{ state._id }}">{{ state.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <span>&#10095;</span>
+                            </div>
+                        </div>
+                        <textarea name="description" placeholder="Описание" style="flex-grow: 1; width: 100%"></textarea>
+                    </div>
+                </div>
+                <button type="submit">Добавить</button>
+                <input type="button" name="close" value="&#x2715;" onclick="close_add_volume()">
+            </form>
+        </div>
+
+        <!-- <h2>Добавить новый том</h2>
+        <form action="{{ url_for('add_volume') }}" method="POST">
+            <input type="text" name="title" placeholder="Название">
+            <input type="text" name="description" placeholder="Описание">
+            <input type="text" name="cover_art_link" placeholder="Ссылка на обложку">
+            <select name="state">
+                {% for state in states %}
+                <option value="{{ state._id }}">{{ state.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Добавить</button>
+        </form> -->
+    </section>
+    <section id="volume">
+        <div class="modal_block">
+            <h1>Редактировать том</h1>
+            <form action="" method="POST" name="form" class="flex_direction-column">
+                <div class="flex_direction-row">
+                    <div class="flex_direction-column">
+                        <img src="" alt="cover" onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='flex';">
+                        <div class="fallback" style="display: none">
+                            <svg fill="#ffffff" height="32px" width="32px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 489.935 489.935" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M486.617,255.067c4.6-6.3,4.4-14.9-0.5-21c-74.1-91.1-154.1-137.3-237.9-137.3c-142.1,0-240.8,132.4-244.9,138 c-4.6,6.3-4.4,14.9,0.5,21c74,91.2,154,137.4,237.8,137.4C383.717,393.167,482.417,260.767,486.617,255.067z M241.617,358.867 c-69.8,0-137.8-38.4-202.4-114c25.3-29.9,105.7-113.8,209-113.8c69.8,0,137.8,38.4,202.4,114 C425.317,274.967,344.917,358.867,241.617,358.867z"></path> <path d="M244.917,157.867c-48,0-87.1,39.1-87.1,87.1s39.1,87.1,87.1,87.1s87.1-39.1,87.1-87.1S292.917,157.867,244.917,157.867z M244.917,297.767c-29.1,0-52.8-23.7-52.8-52.8s23.7-52.8,52.8-52.8s52.8,23.7,52.8,52.8S274.017,297.767,244.917,297.767z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                            <p>У этого тома нет обложки</p>
+                        </div>
+                        <input type="text" name="cover_art_link" placeholder="Ссылка на обложку">
+                    </div>
+                    <div class="flex_direction-column">
+                        <div class="flex_direction-row">
+                            <input type="text" name="title" placeholder="Название">
+                            <div class="select_wrapper">
+                                <select name="state">
+                                    {% for state in states %}
+                                    <option value="{{ state._id }}">{{ state.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <span>&#10095;</span>
+                            </div>
+                        </div>
+                        <textarea name="description" placeholder="Описание" style="flex-grow: 1; width: 100%"></textarea>
+                    </div>
+                </div>
+                <div class="flex_direction-row" style="width: 100%">
+                    <input type="button" name="cancel" value="Отменить">
+                    <button type="submit">Сохранить</button>
+                </div>
+                <input type="button" name="delete" value="Удалить">
+                <input type="button" name="close" value="&#x2715;" onclick="close_volume()">
+            </form>
+            <form action="" method="POST" name="delete" class="flex_direction-column">
+                <p>Вы уверены, что хотите удалить том <span>ИМЯ</span></p>
+                <div class="flex_direction-row" style="width: 100%">
+                    <input type="button" name="cancel" value="Отмена" onclick="close_volume_delete_notice()">
+                    <button type="submit">Удалить</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section id="states">
+        <div class="modal_block">
+            <h1>Все группы</h1>
+            <ul>
+                {% for state in states %}
+                    <li>
+                        <form action="{{ url_for('edit_state', state_id=state._id) }}" method="POST">
+                            <input type="text" name="name" placeholder="Название" value="{{ state.name }}">
+                            <input type="color" name="color" value="{{ state.color }}">
+                            <button type="submit">Сохранить</button>
+                            <input type="button" name="delete" value="Удалить" onclick="open_delete_state({{ state }})">
+                        </form>
+                    </li>
+                {% endfor %}
+                <li>
+                    <form action="{{ url_for('add_state') }}" method="POST">
+                        <input type="text" name="name" placeholder="Название">
+                        <input type="color" name="color" value="#ffffff">
+                        <button type="submit">Добавить</button>
+                    </form>
+                </li>
+                <form id="deleteState" action="" method="POST" name="delete_state">
+                    <p>Вы уверены, что хотите удалить группу <strong>ИМЯ</strong></p>
+                    <input type="button" name="cancel" value="Отмена" onclick="close_delete_state()">
+                    <button type="submit">Удалить</button>
+                </form>
+            </ul>
+            <button name="close" onclick="close_states()">&#x2715;</button>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
+{% endblock %}

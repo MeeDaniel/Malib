@@ -1,0 +1,672 @@
+#volume {
+    display: none;
+}
+
+#volume form[name="delete"] {
+    display: none;
+}
+
+#deleteState {
+    display: none;
+}
+
+#volumes {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+
+.state_block {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.state_block > .top {
+    display: flex;
+    padding: 5px 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.state_block > .top > span {
+    height: 100%;
+    transition-duration: 100ms;
+}
+
+.state_block > .top > span::after {
+    content: '';
+    display: block;
+
+    background-color: var(--secondary);
+    width: 10px;
+    height: 50%;
+    position: absolute;
+    top: 0;
+
+    transform-origin: 100% 100%;
+    transition-duration: 100ms;
+}
+
+.state_block > .top > span::before {
+    content: '';
+    display: block;
+
+    background-color: var(--secondary);
+    width: 10px;
+    height: 19px;
+    position: absolute;
+    bottom: 0;
+
+    transform-origin: 100% 0%;
+    transition-duration: 100ms;
+}
+
+.state_block > .top:hover > span {
+    margin-left: 12px;
+}
+
+.state_block > .top:hover > span::after {
+    transform: rotate(-17deg);
+    background-color: var(--accent-primary);
+}
+
+.state_block > .top:hover > span::before {
+    transform: rotate(17deg);
+    background-color: var(--accent-primary);
+}
+
+.state_block > .top > h1 {
+    position: relative;
+    margin-left: 35px;
+    transition-duration: 100ms;
+}
+
+.state_block > .top > h1::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color);
+    position: absolute;
+    right: -20px;
+    top: 11px;
+    transition-duration: 100ms;
+}
+
+.state_block > .top:hover > h1 {
+    margin-left: 40px;
+}
+
+.state_block > .top > p {
+    overflow-x: hidden;
+    width: 0px;
+    transition-duration: 100ms;
+    text-align: center;
+    margin-left: 50px;
+    transform: translateY(4px);
+}
+
+.state_block > .top:hover > p {
+    width: 17px;
+}
+
+
+.volumes {
+    padding: 9px 25px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.volume {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.volume > .top {
+    position: relative;
+    overflow: hidden;
+    height: 160px;
+    border-radius: 15px;
+}
+
+.volume > .top > img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    transition-duration: 100ms;
+}
+
+.volume > .top > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 0;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    transition-duration: 100ms;
+    position: absolute;
+    overflow: hidden;
+}
+
+.volume > .top > span > svg {
+    fill: var(--font-primary);
+}
+
+.volume:hover > .top > span {
+    height: 30px;
+}
+
+.volume:hover > .top > img {
+    transform: scale(1.05);
+}
+
+.volume > .top > .fallback {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    padding: 0 12.5%;
+    background-color: var(--secondary);
+    transition-duration: 100ms;
+}
+
+.volume > .top > .fallback > p {
+    text-align: center;
+    font-size: 12px;
+    color: var(--font-secondary);
+}
+
+.volume > .top > .fallback > svg {
+    fill: var(--font-secondary);
+} 
+
+.volume:hover > .top > .fallback {
+    transform: scale(1.05);
+}
+
+.volume > strong {
+    padding: 9px;
+    transition-duration: 100ms;
+}
+
+.volume:hover > strong {
+    color: var(--font-secondary);
+    transform: translateY(-3px);
+}
+
+
+#volume,
+#addVolume {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    left: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal_block {
+    max-width: 1200px;
+    min-height: 200px;
+    padding: 20px;
+    background-color: var(--secondary);
+    box-shadow: 0 0 15px var(--primary);
+    position: relative;
+    border-radius: 10px;
+    border: var(--ternary) solid 2px;
+}
+
+.modal_block > h1 {
+    text-align: center;
+}
+
+.modal_block > form > input[name="close"] {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    outline: none;
+    border: var(--ternary) solid 2px;
+    border-radius: 50%;
+    color: var(--font-primary);
+    cursor: pointer;
+    transition-duration: 100ms;
+}
+
+.modal_block > form > input[name="close"]:hover {
+    border-color: var(--accent-primary);
+    transform: rotate(10deg);
+}
+
+#volume form,
+#addVolume form {
+    margin-top: 20px;
+}
+
+#volume input[type="text"],
+#addVolume input[type="text"] {
+    background: none;
+    font-family: Consolas;
+    font-size: 16px;
+    color: var(--font-primary);
+    outline: none;
+    border: none;
+    border-bottom: var(--ternary) solid 2px;
+}
+
+#volume input[type="text"]:focus,
+#addVolume input[type="text"]:focus {
+    border-bottom-color: var(--accent-primary);
+}
+
+#volume .flex_direction-row,
+#addVolume .flex_direction-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#volume .flex_direction-column,
+#addVolume .flex_direction-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#volume img,
+#addVolume img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+}
+
+#volume .fallback,
+#addVolume .fallback {
+    width: 112.5px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 18.75px;
+    background-color: var(--secondary);
+    transition-duration: 100ms;
+}
+
+#volume .fallback > p,
+#addVolume .fallback > p {
+    text-align: center;
+    font-size: 12px;
+    color: var(--font-secondary);
+}
+
+#volume .fallback > svg,
+#addVolume .fallback > svg {
+    fill: var(--font-secondary);
+}
+
+#volume input[name="cancel"], #volume button,
+#addVolume input[name="cancel"], #addVolume button {
+    width: 50%;
+    flex-grow: 1;
+}
+
+#volume select,
+#addVolume select {
+    appearance: none;
+    background-color: var(--secondary);
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: Consolas;
+    font-size: 17px;
+    cursor: inherit;
+    line-height: inherit;
+    color: var(--font-primary);
+    border-bottom: var(--ternary) solid 2px;
+    outline: none;
+}
+
+#volume select:focus,
+#addVolume select:focus {
+    border-bottom-color: var(--accent-primary);
+}
+
+#volume .select_wrapper,
+#addVolume .select_wrapper {
+    position: relative;
+}
+
+#volume .select_wrapper span,
+#addVolume .select_wrapper span {
+    position: absolute;
+    width: 0px;
+    height: 17px;
+    /* border: red solid 1px; */
+    right: 17px;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 100ms;
+    overflow: hidden;
+}
+
+#volume .select_wrapper select:focus + span,
+#addVolume .select_wrapper select:focus + span {
+    transform: rotate(90deg);
+}
+
+#volume .select_wrapper select:hover + span,
+#addVolume .select_wrapper select:hover + span {
+    right: 0px;
+    width: 17px;
+}
+
+#volume textarea,
+#addVolume textarea {
+    width: calc(100% - 12px) !important;
+    resize: vertical;
+    background: none;
+    border: var(--ternary) solid 2px;
+    outline: none;
+    color: var(--font-primary);
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 4px;
+}
+
+#volume textarea:focus,
+#addVolume textarea:focus {
+    border-color: var(--accent-primary);
+}
+
+#volume input[name="cancel"], #volume button[type="submit"],
+#addVolume input[name="cancel"], #addVolume button[type="submit"] {
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 3px 0;
+    background: none;
+    border: transparent solid 2px;
+    outline: none;
+    cursor: pointer;
+    color: var(--font-primary);
+    transition-duration: 100ms;
+}
+
+#volume input[name="cancel"],
+#addVolume input[name="cancel"] {
+    border: var(--ternary) solid 2px;
+}
+
+#volume input[name="cancel"]:hover, #volume input[name="cancel"]:focus,
+#addVolume input[name="cancel"]:hover, #addVolume input[name="cancel"]:focus {
+    border-color: var(--accent-primary);
+}
+
+#volume button[type="submit"],
+#addVolume button[type="submit"] {
+    border-color: var(--accent-secondary);
+}
+
+#volume button[type="submit"]:hover, #volume button[type="submit"]:focus,
+#addVolume button[type="submit"]:hover, #addVolume button[type="submit"]:focus {
+    background-color: transparent;
+    border-color: var(--accent-primary);
+}
+
+#volume button[type="submit"]:active,
+#addVolume button[type="submit"]:active {
+    background-color: var(--accent-primary);
+}
+
+#volume input[name="delete"], #volume form[name="delete"] button[type="submit"],
+#addVolume input[name="delete"], #addVolume form[name="delete"] button[type="submit"] {
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 3px 0;
+    background: none;
+    border: var(--ternary) solid 2px;
+    outline: none;
+    cursor: pointer;
+    color: var(--font-primary);
+    transition-duration: 100ms;
+    width: 100%;
+}
+
+#volume input[name="delete"]:hover, #volume form[name="delete"] button[type="submit"]:hover,
+#addVolume input[name="delete"]:hover, #addVolume form[name="delete"] button[type="submit"]:hover {
+    border-color: var(--alarm-primary);
+}
+
+#volume input[name="delete"]:active, #volume form[name="delete"] button[type="submit"]:active,
+#addVolume input[name="delete"]:active, #addVolume form[name="delete"] button[type="submit"]:active {
+    background-color: var(--alarm-primary);
+} 
+
+
+#addVolume {
+    display: none;
+}
+
+#addVolume button[type="submit"] {
+    width: 100%
+}
+
+
+
+#states {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+#states .modal_block {
+    position: relative;
+}
+
+#states button[name="close"] {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    outline: none;
+    border: var(--ternary) solid 2px;
+    border-radius: 50%;
+    color: var(--font-primary);
+    cursor: pointer;
+    transition-duration: 100ms;
+}
+
+#states button[name="close"]:hover {
+    border-color: var(--accent-primary);
+    transform: rotate(10deg);
+}
+
+#states .modal_block > h1 {
+    margin-bottom: 20px;
+}
+
+#states li::marker {
+    color: transparent;
+}
+
+#states input[type="text"] {
+    background: none;
+    font-family: Consolas;
+    font-size: 16px;
+    color: var(--font-primary);
+    outline: none;
+    border: none;
+    border-bottom: var(--ternary) solid 2px;
+}
+
+#states input[type="text"]:focus {
+    border-bottom-color: var(--accent-primary);
+}
+
+#states input[type="color"] {
+    border: transparent solid 2px;
+    background-color: transparent;
+    padding: 2px;
+    position: relative;
+    outline: none;
+}
+
+#states input[type="color"]:hover {
+    border: var(--ternary) solid 2px;
+}
+
+#states input[type="color"]:focus {
+    border: var(--accent-primary) solid 2px;
+}
+
+#states li {
+    padding: 5px 0;
+    margin: 4px 0;
+}
+
+#states li > form {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+#states button[type="submit"] {
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 3px 0;
+    flex-grow: 1;
+    min-width: 130px;
+    background: none;
+    border: var(--ternary) solid 2px;
+    outline: none;
+    cursor: pointer;
+    color: var(--font-primary);
+    transition-duration: 100ms;
+}
+
+#states button[type="submit"]:hover, #states button[type="submit"]:focus {
+    border-color: var(--accent-primary);
+}
+
+#states button[type="submit"]:active {
+    border-color: var(--accent-primary);
+    background-color: var(--accent-primary);
+}
+
+#states input[type="button"] {
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 3px 0;
+    flex-grow: 1;
+    min-width: 130px;
+    background: none;
+    border: var(--alarm-primary) solid 2px;
+    outline: none;
+    cursor: pointer;
+    color: var(--font-primary);
+    transition-duration: 100ms;
+}
+
+#states input[type="button"]:hover {
+    border-color: var(--alarm-secondary);
+}
+
+#states input[type="button"]:focus {
+    color: var(--font-secondary);
+}
+
+#states input[type="button"]:active {
+    border-color: var(--alarm-primary);
+    background-color: var(--alarm-primary);
+}
+
+
+#states form#deleteState p {
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+#states form#deleteState input {
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 3px 0;
+    flex-grow: 1;
+    min-width: 130px;
+    background: none;
+    border: var(--ternary) solid 2px;
+    outline: none;
+    cursor: pointer;
+    color: var(--font-primary);
+    transition-duration: 100ms;
+}
+
+#states form#deleteState input:hover, #states form#deleteState input:focus {
+    border-color: var(--accent-primary);
+}
+
+#states form#deleteState input:active {
+    border-color: var(--accent-primary);
+    background-color: var(--accent-primary);
+}
+
+#states form#deleteState button[type="submit"] {
+    font-family: Consolas;
+    font-size: 17px;
+    padding: 3px 0;
+    flex-grow: 1;
+    min-width: 130px;
+    background: none;
+    border: var(--alarm-primary) solid 2px;
+    outline: none;
+    cursor: pointer;
+    color: var(--font-primary);
+    transition-duration: 100ms;
+}
+
+#states form#deleteState button[type="submit"]:hover {
+    border-color: var(--alarm-secondary);
+}
+
+#states form#deleteState button[type="submit"]:focus {
+    color: var(--font-secondary);
+}
+
+#states form#deleteState button[type="submit"]:active {
+    border-color: var(--alarm-primary);
+    background-color: var(--alarm-primary);
+}
+

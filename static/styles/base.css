@@ -1,0 +1,141 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #171717;
+    --secondary: #272727;
+    --ternary: #474747;
+    --font-primary: #e0e0e0;
+    --font-secondary: #bababa;
+    --accent-primary: #8a5cf5;
+    --accent-secondary: #6944bf;
+    --accent-primary-half-opacity: #8a5cf580;
+    --alarm-primary: #ea2744;
+    --alarm-secondary: #bb1d47;
+}
+/* 
+:root {
+    --primary: #ffffff;
+    --secondary: #eeeeee;
+    --ternary: #dcdcdc;
+    --font-primary: #000000;
+    --font-secondary: #222222;
+    --accent-primary: #8a5cf5;
+    --accent-secondary: #6944bf;
+    --accent-primary-half-opacity: #8a5cf580;
+    --alarm-primary: #ea2744;
+    --alarm-secondary: #bb1d47;
+} */
+
+body {
+    background-color: var(--primary);
+    font-family: Consolas;
+    color: var(--font-primary);
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-primary);
+}
+
+a.link {
+    color: var(--accent-primary);
+    text-decoration: underline;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header > .button {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9px;
+    transition-duration: 200ms;
+}
+
+header > .button:hover {
+    background-color: var(--secondary);
+    transform: translateX(-2px);
+}
+header > .button > svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transition-duration: 200ms;
+}
+
+header > .button > svg.hover {
+    fill: var(--accent-primary);
+    opacity: 0;
+}
+header > .button:hover > svg.hover {
+    opacity: 1;
+}
+
+header h1 {
+    font-family: Consolas;
+    font-size: 31px;
+    overflow: hidden;
+}
+
+header h1 > a {
+    display: flex;
+}
+
+header h1 > a > span {
+    display: flex;
+    flex-direction: column;
+    height: 37px;
+}
+
+header h1 > a > span > span {
+    transition-duration: 200ms;
+}
+
+header h1 > a > span > span.default {
+    transform: scaleY(100%);
+    height: 100%;
+}
+
+header h1 > a > span > span.hover {
+    color: var(--accent-primary);
+    transform: scaleY(0%);
+    height: 0%;
+}
+
+header h1:hover > a > span > span.default {
+    transform: scaleY(0%);
+    height: 0%;
+}
+
+header h1:hover > a > span > span.hover {
+    transform: scaleY(100%);
+    height: 100%;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.content {
+    width: 1200px;
+}

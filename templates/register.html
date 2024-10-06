@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/register.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Зарегистрироваться</h1>
+    {% if error %}
+        <p class="error_message">Это имя пользователя уже занято</p>
+    {% endif %}
+    <form action="{{ url_for('register') }}" method="POST">
+        <input type="text" name="username" placeholder="Имя пользователя">
+        <input type="password" name="password" placeholder="Пароль">
+        <p>Уже есть свой аккаунт? <a href="{{ url_for('login') }}" class="link">Войти</a></p>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+{% endblock %}

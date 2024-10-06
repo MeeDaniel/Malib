@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>Добро пожаловать!</h1>
+    <p>
+        Вы попали на сайт для ведения своей личной
+        виртуальной библиотеки <strong>Malib</strong>.
+    </p>
+    <div>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
+        <p>
+            Здесь ты можешь легко
+            организовать свою коллекцию
+            книг, комиксов или чего угодно.
+            Просто добавляй тома, отмечай,
+            что сейчас читаешь, что уже
+            прочитал, и храни всё в удобном
+            виде. Всё просто и понятно —
+            начни прямо сейчас!
+        </p>
+    </div>
+    <div>
+        <p>Для начала использования вам необходимо</p>
+        <a href="{{ url_for('login') }}" class="link">Войти</a> или <a href="{{ url_for('register') }}" class="link">Зарегистрироваться</a>
+    </div>
+{% endblock %}
